@@ -1,6 +1,6 @@
 # SimpleScalaCommandBuilder
 
-Type safe, simple, intuitive Sponge command builder for Scala.
+A type safe, simple, intuitive Sponge command builder written in Scala
 
 Example (in the plugin main class annotated with `@Plugin`):
 
