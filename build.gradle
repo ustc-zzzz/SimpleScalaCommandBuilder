@@ -1,0 +1,38 @@
+buildscript {
+    repositories { jcenter() }
+    dependencies { classpath 'com.github.jengelman.gradle.plugins:shadow:1.+' }
+}
+
+apply plugin: 'java'
+apply plugin: 'scala'
+apply plugin: 'com.github.johnrengelman.shadow'
+
+defaultTasks 'clean', 'build'
+
+version = '0.1.0'
+group = 'con.github.ustc_zzzz'
+archivesBaseName = 'SimpleScalaCommandBuilder'
+
+repositories {
+    mavenCentral()
+    maven { url = 'https://repo.spongepowered.org/maven' }
+}
+
+dependencies {
+    compile 'org.scala-lang:scala-library:2.12.+'
+    compile 'org.spongepowered:spongeapi:7.1.0-SNAPSHOT'
+}
+
+artifacts {
+    archives shadowJar
+}
+
+jar {
+    classifier = 'pure'
+}
+
+shadowJar {
+    classifier = null
+    dependencies { it.include it.dependency('org.scala-lang:scala-library:.*') }
+    relocate 'scala', project.group.toString() + '.simplescalacommandbuilder.util.repackage.scala'
+}
